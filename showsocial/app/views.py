@@ -6,8 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from djoser.serializers import UserSerializer
-from django.contrib.auth.models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
+# from django.contrib.auth.models import User
+from app.models import UserProfile
 
 
 @api_view(['GET'])
@@ -17,7 +18,7 @@ def get_users(request):
     # Get the search input from the query parameter
     search_input = request.GET.get('search', '')
     current_user = request.user  # Get the authenticated user who sent the request
-    users = User.objects.filter(
+    users = UserProfile.objects.filter(
         is_superuser=False,  # Exclude admins
         username__icontains=search_input  # Filter by username containing the search input
     ).exclude(id=current_user.id)  # Exclude the current user

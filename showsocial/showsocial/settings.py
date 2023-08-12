@@ -34,13 +34,11 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
 
+# # SECURITY WARNING: don't run with debug turned on in production!
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
 
-
-# # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
+AUTH_USER_MODEL = 'app.UserProfile'
 
 ALLOWED_HOSTS = []
 
@@ -71,6 +69,7 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework_simplejwt',
     'corsheaders',
+    'app'
 ]
 
 MIDDLEWARE = [
