@@ -24,4 +24,5 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('api/users/', get_users, name='get_users'),
     path('api/users/<str:username>', get_one_user, name='get_one_user'),
+    path('api/shows/add/', add_show, name="add_show"),
 ]

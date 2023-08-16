@@ -55,6 +55,13 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+DJOSER = {
+    'SERIALIZERS': {
+        'current_user': 'app.serializers.CustomUserSerializer',
+    },
+    # ... other Djoser settings ...
+}
+
 # Application definition
 
 INSTALLED_APPS = [

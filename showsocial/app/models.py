@@ -6,10 +6,12 @@ from django.contrib.auth.models import AbstractUser
 
 class UserProfile(AbstractUser):
     username = models.CharField(max_length=100, unique=True)
+    testProperty = models.TextField(
+        default="If the user has this text, it's using the custom user model! Woohoo!")
     # email, profilePic, myShows, posts, friends
 
     def __str__(self):
-        return self.username
+        return self.username + "custom user profile"
 
 
 class FriendRequest(models.Model):
@@ -34,7 +36,8 @@ class Friend(models.Model):
 
 
 class UserShow(models.Model):
-    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        'UserProfile', on_delete=models.CASCADE, related_name='user_shows')
     show = models.ForeignKey('Show', on_delete=models.SET_NULL, null=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -45,7 +48,7 @@ class UserShow(models.Model):
 class Show(models.Model):
     id = models.TextField(primary_key=True)
     name = models.TextField()
-    image = models.URLField()
+    image = models.URLField(null=True)
 
     def __str__(self):
         return self.name
